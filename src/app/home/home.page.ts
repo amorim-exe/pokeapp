@@ -1,4 +1,10 @@
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
+import { PokemonService } from '../services/pokemon.service';
+import { SegmentHeaderComponent } from '../components/segment-header.component';
+
 import {
   IonHeader,
   IonToolbar,
@@ -12,13 +18,10 @@ import {
   IonRow,
   IonCol,
   IonIcon,
-  // IonLabel,
-  // IonSegmentButton,
-  // IonSegment
+  IonLabel,
+  IonSegmentButton,
+  IonSegment
 } from '@ionic/angular/standalone';
-
-import { NgFor } from '@angular/common';
-import { PokemonService } from '../services/pokemon.service';
 
 @Component({
   selector: 'app-home',
@@ -39,9 +42,11 @@ import { PokemonService } from '../services/pokemon.service';
     IonCol,
     IonIcon,
     NgFor,
-    // IonLabel,
-    // IonSegmentButton,
-    // IonSegment
+    IonLabel,
+    IonSegmentButton,
+    IonSegment,
+    FormsModule,
+    SegmentHeaderComponent
   ],
 })
 export class HomePage {
@@ -53,12 +58,19 @@ export class HomePage {
   offset = 0;
   limit = 20;
   favorites: Set<string> = new Set();
-  constructor() {}
+  constructor(private router: Router) {}
 
     ngOnInit() {
     this.loadFavorites();
     this.loadPokemons();
   }
+
+  segmentChanged(event: any) {
+  const value = event.detail.value;
+  if (value === 'favorites') {
+    this.router.navigateByUrl('/favorites');
+  }
+}
 
   loadPokemons() {
     this.pokemonService.getPokemons(this.offset, this.limit).subscribe(res => {

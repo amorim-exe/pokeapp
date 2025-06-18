@@ -1,0 +1,17 @@
+<app-segment-header></app-segment-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let poke of favorites">
+        <ion-card>
+          <img [src]="poke.image" />
+          <ion-card-header>
+            <ion-card-title class="ion-text-capitalize">{{ poke.name }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
