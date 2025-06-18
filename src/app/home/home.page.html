@@ -14,11 +14,10 @@
           <ion-card-header>
             <ion-card-title class="ion-text-capitalize">
               {{ pokemon.name }}
-              <ion-icon
-                [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'"
-                (click)="toggleFavorite(pokemon.name)"
-                slot="end"
-              ></ion-icon>
+              <ion-icon [name]="isFavorite(pokemon.name) ? 'heart' : 'heart-outline'"
+                (click)="toggleFavorite(pokemon.name)" 
+                style="cursor: pointer; margin-left: 8px;">
+              </ion-icon>
             </ion-card-title>
           </ion-card-header>
         </ion-card>
